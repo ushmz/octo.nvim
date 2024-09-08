@@ -118,6 +118,7 @@ function PullRequest:get_commit_changed_files(rev, callback)
         local FileEntry = require("octo.reviews.file-entry").FileEntry
         local results = vim.fn.json_decode(output)
         local files = {}
+        local commit = results.commit or {}
         if results.files then
           for _, result in ipairs(results.files) do
             local entry = FileEntry:new {
@@ -134,7 +135,7 @@ function PullRequest:get_commit_changed_files(rev, callback)
             }
             table.insert(files, entry)
           end
-          callback(files)
+          callback(files, commit)
         end
       end
     end,

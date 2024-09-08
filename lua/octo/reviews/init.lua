@@ -111,11 +111,13 @@ function Review:focus_commit(right, left)
     files = {},
   }
   self.layout:open(self)
-  local cb = function(files)
+  local cb = function(files, commit)
     -- pre-fetch the first file
     if #files > 0 then
       files[1]:fetch()
     end
+    -- FIXME: not ideally placed here
+    self.layout.message = commit and commit.message or ""
     self.layout.files = files
     self.layout:update_files()
   end
