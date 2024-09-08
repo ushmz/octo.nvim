@@ -25,6 +25,7 @@ local win_reset_opts = {
 ---@field files FileEntry[]
 ---@field file_idx integer
 ---@field ready boolean
+---@field message string
 local Layout = {}
 Layout.__index = Layout
 
