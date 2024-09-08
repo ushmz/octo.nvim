@@ -379,9 +379,6 @@ function FilePanel:render()
     line_idx = line_idx + 1
   end
 
-  local right = current_review.layout.right
-  local left = current_review.layout.left
-  local extra_info = { left:abbrev() .. ".." .. right:abbrev() }
   table.insert(lines, "")
   line_idx = line_idx + 1
 
@@ -389,6 +386,19 @@ function FilePanel:render()
   add_hl("DiffviewFilePanelTitle", line_idx, 0, #s)
   table.insert(lines, s)
   line_idx = line_idx + 1
+
+  local message = current_review.layout.message or ""
+  if message ~= "" then
+    s = message
+    add_hl("OctoFilePanelMessage", line_idx, 0, #s)
+    table.insert(lines, s)
+    line_idx = line_idx + 1
+    return
+  end
+
+  local right = current_review.layout.right
+  local left = current_review.layout.left
+  local extra_info = { left:abbrev() .. ".." .. right:abbrev() }
 
   for _, arg in ipairs(extra_info) do
     s = arg
